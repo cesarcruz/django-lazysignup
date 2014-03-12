@@ -42,6 +42,18 @@ For example::
 When accessing the above view, a very simple response containing the generated
 username will be displayed.
 
+Example using decorator in a class-based views::
+
+  from lazysignup.decorators import allow_lazy_user
+  from django.utils.decorators import method_decorator
+  from django.views.generic import CreateView
+
+  class MyView(CreateView):
+
+      @method_decorator(allow_lazy_user)
+      def dispatch(self, *args, **kwargs):
+          return super(MyView, self).dispatch(*args, **kwargs)
+
 ``require_lazy_user`` and ``require_nonlazy_user`` decorators
 -------------------------------------------------------------
 
